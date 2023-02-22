@@ -1,19 +1,19 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './App.css';
-import Navigation from './components/navigation/navigation.js';
-import Logo from './components/logo/logo.js';
-import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm.js';
-import Rank from './components/Rank/Rank.js'
+import Navigation from './components/Navigation/Navigation';
+import Logo from './components/Logo/Logo';
+import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
+import Rank from './components/Rank/Rank'
 
 
 function App() {
   return (
     <div className="App">
-    <Navigation />
-     <Logo />
-     <Rank />
-     <ImageLinkForm />
-      {/* <FaceRecognition/>} */}
+      <Navigation />
+      <Logo />
+      <Rank />
+      <ImageLinkForm />
+      {/* <FaceRecognition/> */}
     </div>
   );
 }

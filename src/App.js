@@ -9,8 +9,12 @@ import ParticlesBg from 'particles-bg';
 function App() {
   return (
     <div className="App">
-      <Navigation />
-      <Logo />
+      <br />
+      <div className="flex-l"><Logo /><Navigation /></div>
+      <br />
+      <br />
+      <br />
+      <br />
       <Rank />
       <ImageLinkForm />
       {/* <FaceRecognition/> */}

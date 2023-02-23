@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       <br />
-      <div className="flex-l"><Logo /><Navigation /></div>
+      <div className="inline-flex flex-row"><Logo /><Navigation /></div>
       <br />
       <br />
       <br />

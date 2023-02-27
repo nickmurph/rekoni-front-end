@@ -1,3 +1,4 @@
+// require('react');
 import React from 'react';
 import './ImageLinkForm.css';
 

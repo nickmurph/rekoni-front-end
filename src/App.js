@@ -15,6 +15,14 @@ class App extends Component {
     }
   }
 
+  onInputChange= (event) => {
+    console.log(event.target.value)
+  }
+
+  onButtonSubmit = () => {
+    console.log('click')
+  }
+
   render() {
     return (
       <div className="App">
@@ -25,7 +33,7 @@ class App extends Component {
         <br />
         <br />
         <Rank />
-        <ImageLinkForm />
+        <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
         {/* <FaceRecognition/> */}
         <ParticlesBg color="#424957" num={150} type="cobweb" bg={true} />
       </div>   

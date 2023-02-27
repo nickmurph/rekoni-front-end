@@ -6,6 +6,6 @@ const FaceRecognition = ({imageURL})  => {
             <img alt='' src={imageURL} />
         </div>
     )
-}
+};
 
 export default FaceRecognition;

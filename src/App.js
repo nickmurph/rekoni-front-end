@@ -16,7 +16,7 @@ const PAT = clarifaiPAT;
 const USER_ID = 'w0rtw0rtw0rt';
 const APP_ID = 'rekoni';
 const MODEL_ID = 'face-detection';
-const MODEL_VERSION_ID = '6dc7e46bc9124c5c8824be4822abe105';
+const MODEL_VERSION_ID = '45fb9a671625463fa646c3523a3087d5';
 
 
 
@@ -26,7 +26,7 @@ class App extends Component {
     super();
     this.state = {
       input: '',
-      imageURL: ''
+      imageURL: ' ',
     }
   }
 
@@ -38,9 +38,6 @@ class App extends Component {
   onButtonSubmit = () => {
     this.setState({imageURL: this.state.input});
 
-    let IMAGE_URL = this.state.input;
-    // console.log(this.state.input)
-    // console.log(this.state.imageURL)
 
     const clarifaiCredentials = JSON.stringify({
       "user_app_id": {
@@ -51,7 +48,7 @@ class App extends Component {
         {
             "data": {
                 "image": {
-                    "url": IMAGE_URL
+                    "url": this.state.input
                 }
             }
         }
@@ -85,8 +82,8 @@ class App extends Component {
         <br />
         <Rank />
         <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
-        <FaceRecognition />
-        <ParticlesBg color="#424957" num={150} type="cobweb" bg={true} />
+        <FaceRecognition imageURL={this.state.imageURL} />
+        <ParticlesBg color="#cad0db" num={150} type="cobweb" bg={true} />
       </div>   
     );
   }

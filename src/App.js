@@ -5,6 +5,18 @@ import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import ParticlesBg from 'particles-bg';
+import {clarifaiKey, clarifaiPAT} from './ClarifaiKey.js';
+
+
+//Helper vars for querying the Clarifai REST API, different from the clarifai node package used by ZTM which is now deprecated
+//API key and PAT kept in JS file that is gitignored, for now
+const PAT = clarifaiPAT;
+const USER_ID = 'w0rtw0rtw0rt';
+const APP_ID = 'rekoni';
+const MODEL_ID = 'face-detection';
+const MODEL_VERSION_ID = '6dc7e46bc9124c5c8824be4822abe105';
+let IMAGE_URL = 'https://samples.clarifai.com/metro-north.jpg';
+
 
 class App extends Component {
 
@@ -20,8 +32,39 @@ class App extends Component {
   }
 
   onButtonSubmit = () => {
-    console.log('click')
+    console.log('click');
+
+    const clarifaiCredentials = JSON.stringify({
+      "user_app_id": {
+        "user_id": USER_ID,
+        "app_id": APP_ID
+    },
+    "inputs": [
+        {
+            "data": {
+                "image": {
+                    "url": IMAGE_URL
+                }
+            }
+        }
+    ]
+    });
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Key ' + PAT
+      },
+      body: clarifaiCredentials
+  };
+
+    fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
   }
+
 
   render() {
     return (

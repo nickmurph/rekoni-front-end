@@ -4,6 +4,7 @@ import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
+import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import ParticlesBg from 'particles-bg';
 import {clarifaiKey, clarifaiPAT} from './ClarifaiKey.js';
 
@@ -77,7 +78,7 @@ class App extends Component {
         <br />
         <Rank />
         <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
-        {/* <FaceRecognition/> */}
+        <FaceRecognition />
         <ParticlesBg color="#424957" num={150} type="cobweb" bg={true} />
       </div>   
     );

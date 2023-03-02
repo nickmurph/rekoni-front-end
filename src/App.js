@@ -89,8 +89,8 @@ class App extends Component {
 
   };
 
-  onRouteChange = () => {
-    this.setState({route: 'Home'});
+  onRouteChange = (newRoute) => {
+    this.setState({route: newRoute});
   }
 
 
@@ -98,7 +98,10 @@ class App extends Component {
     return (
       <div className="App">
         <br />
-        <div className="inline-flex flex-row"><Logo /><Navigation /></div>
+        <div className="inline-flex flex-row">
+          <Logo />
+          <Navigation onRouteChange={this.onRouteChange} />
+        </div>
         <br />
         <br />
         <br />

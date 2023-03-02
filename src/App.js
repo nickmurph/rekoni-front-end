@@ -29,7 +29,8 @@ class App extends Component {
     this.state = {
       input: '',
       imageURL: ' ',
-      box: {}
+      box: {},
+      route: 'SignIn',
     }
   }
 
@@ -88,6 +89,10 @@ class App extends Component {
 
   };
 
+  onRouteChange = () => {
+    this.setState({route: 'Home'});
+  }
+
 
   render() {
     return (
@@ -98,11 +103,16 @@ class App extends Component {
         <br />
         <br />
         <br />
-        <SignIn />
+        {this.state.route === 'SignIn'
+        ? <SignIn onRouteChange={this.onRouteChange} />
+        : <div>
         <Rank />
         <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
         <br />
         <FaceRecognition box={this.state.box} imageURL={this.state.imageURL} />
+        </div>
+        }
+    
         <ParticlesBg color="#cad0db" num={150} type="cobweb" bg={true} />
       </div>   
     );

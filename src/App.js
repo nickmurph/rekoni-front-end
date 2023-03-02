@@ -99,7 +99,7 @@ class App extends Component {
         <Rank />
         <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
         <br />
-        <FaceRecognition imageURL={this.state.imageURL} />
+        <FaceRecognition box={this.state.box} imageURL={this.state.imageURL} />
         <ParticlesBg color="#cad0db" num={150} type="cobweb" bg={true} />
       </div>   
     );

@@ -5,6 +5,8 @@ import Logo from './components/Logo/Logo';
 import Rank from './components/Rank/Rank';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
+import SignIn from './components/SignIn/SignIn';
+
 import ParticlesBg from 'particles-bg';
 import {clarifaiKey, clarifaiPAT} from './ClarifaiKey.js';
 
@@ -92,6 +94,7 @@ class App extends Component {
       <div className="App">
         <br />
         <div className="inline-flex flex-row"><Logo /><Navigation /></div>
+        <SignIn />
         <br />
         <br />
         <br />

@@ -4,7 +4,7 @@ const FaceRecognition = ({imageURL})  => {
     return (
         <div className='center ma'>
             <div className='absolute mt2'>
-            <img width='500px' height='auto' alt='' src={imageURL} />
+            <img id='inputImage' width='500px' height='auto' alt='' src={imageURL} />
             </div>
         </div>
     )

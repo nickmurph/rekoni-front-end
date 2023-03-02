@@ -32,7 +32,8 @@ class App extends Component {
   }
 
   calcFaceDimensions = (data) => {
-
+    const foundFace = data.outputs[0].data.regions[0].region_info.bounding_box;
+    const image = document.getElementById('inputImage');
   }
 
 
@@ -58,8 +59,7 @@ class App extends Component {
                 }
             }
         }
-    ]
-    });
+    ]});
 
     const requestOptions = {
       method: 'POST',
@@ -68,14 +68,12 @@ class App extends Component {
           'Authorization': 'Key ' + API_PAT
       },
       body: clarifaiCredentials
-  };
+    };
 
     fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", requestOptions)
-    .then(response => {
-      console.log(response);
-      this.calcFaceDimensions(response);
-    })
-    .catch(error => console.log('error', error));
+    .then(response => this.calcFaceDimensions(response))
+    .catch(error => console.log('error: ', error));
+
   };
 
 

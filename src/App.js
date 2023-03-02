@@ -43,9 +43,11 @@ class App extends Component {
     }
   };
 
+  displayFaceBox = (box) => {
+    this.setState({box: box});
+  }
 
   onInputChange= (event) => {
-    // console.log(event.target.value)
     this.setState({input: event.target.value});
   };
 
@@ -79,7 +81,7 @@ class App extends Component {
 
     fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", requestOptions)
     .then(response => response.json())
-    .then(result =>  this.calcFaceDimensions(result))
+    .then(result =>  this.displayFaceBox(this.calcFaceDimensions(result)))
     .catch(error => console.log(error));
 
   };

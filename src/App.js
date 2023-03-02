@@ -12,7 +12,7 @@ import {clarifaiKey, clarifaiPAT} from './ClarifaiKey.js';
 //Helper vars for querying the Clarifai REST API, different from the clarifai node package used by ZTM which is now deprecated
 //API key and PAT kept in JS file that is gitignored, for now
 const API_KEY = clarifaiKey;
-const PAT = clarifaiPAT;
+const API_PAT = clarifaiPAT;
 const USER_ID = 'w0rtw0rtw0rt';
 const APP_ID = 'rekoni';
 const MODEL_ID = 'face-detection';
@@ -27,8 +27,14 @@ class App extends Component {
     this.state = {
       input: '',
       imageURL: ' ',
+      box: {}
     }
   }
+
+  calcFaceDimensions = (data) => {
+
+  }
+
 
   onInputChange= (event) => {
     // console.log(event.target.value)
@@ -59,14 +65,16 @@ class App extends Component {
       method: 'POST',
       headers: {
           'Accept': 'application/json',
-          'Authorization': 'Key ' + PAT
+          'Authorization': 'Key ' + API_PAT
       },
       body: clarifaiCredentials
   };
 
     fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log('POST request made')) //print result for full info
+    .then(response => {
+      console.log(response);
+      this.calcFaceDimensions(response);
+    })
     .catch(error => console.log('error', error));
   };
 

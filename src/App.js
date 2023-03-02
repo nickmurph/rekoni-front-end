@@ -35,10 +35,13 @@ class App extends Component {
     const foundFace = data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('inputImage');
     const [width, height] = [Number(image.width), Number(image.height)];
-    console.log(width,height);
-
-
-  }
+    return {
+      leftCol: foundFace.left_col * width,
+      topRow: foundFace.top_row * height,
+      rightCol: width - (foundFace.right_col * width),
+      bottomRow: height - (foundFace.bottom_row * height)
+    }
+  };
 
 
   onInputChange= (event) => {

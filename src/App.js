@@ -94,11 +94,11 @@ class App extends Component {
       <div className="App">
         <br />
         <div className="inline-flex flex-row"><Logo /><Navigation /></div>
+        <br />
+        <br />
+        <br />
+        <br />
         <SignIn />
-        <br />
-        <br />
-        <br />
-        <br />
         <Rank />
         <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
         <br />

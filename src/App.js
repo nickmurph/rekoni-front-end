@@ -34,6 +34,10 @@ class App extends Component {
   calcFaceDimensions = (data) => {
     const foundFace = data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('inputImage');
+    const [width, height] = [Number(image.width), Number(image.height)];
+    console.log(width,height);
+
+
   }
 
 
@@ -71,8 +75,9 @@ class App extends Component {
     };
 
     fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", requestOptions)
-    .then(response => this.calcFaceDimensions(response))
-    .catch(error => console.log('error: ', error));
+    .then(response => response.json())
+    .then(result =>  this.calcFaceDimensions(result))
+    .catch(error => console.log(error));
 
   };
 

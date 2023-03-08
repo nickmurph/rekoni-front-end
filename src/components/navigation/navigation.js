@@ -1,5 +1,5 @@
 import React from 'react';
-let isSignedIn = false;
+let isSignedIn = true;
 
 const Navigation = ({onRouteChange})  => {
         if (isSignedIn){
@@ -9,8 +9,9 @@ const Navigation = ({onRouteChange})  => {
         </nav>
         )
         } else {
-            document.getElementById('logo');
-            return 0;
+            // let logoWrap = document.getElementById('logoWrapper');
+            // logoWrap.className = 'center';
+            return;
         }
 }
 

@@ -31,7 +31,8 @@ class App extends Component {
       input: '',
       imageURL: ' ',
       box: {},
-      route: 'SignIn',
+      route: 'signin', 
+      isSignedIn: false
     }
   }
 
@@ -90,8 +91,14 @@ class App extends Component {
 
   };
 
-  onRouteChange = (newRoute) => {
-    this.setState({route: newRoute});
+  onRouteChange = (route) => {
+    if (route === 'signout'){
+      this.setState({isSignedIn: false})
+      route = "signin"
+    }else if (route === 'home'){
+      this.setState({isSignedIn: true})
+    }
+    this.setState({route: route});
   }
 
 
@@ -101,13 +108,13 @@ class App extends Component {
         <br />
         <div className="inline-flex flex-row">
           <Logo />
-          <Navigation onRouteChange={this.onRouteChange} />
+          <Navigation isSignedIn={this.state.isSignedIn} onRouteChange={this.onRouteChange} />
         </div>
         <br />
         <br />
         <br />
         <br />
-        {this.state.route === 'Home'
+        {this.state.route === 'home'
         ? <div>
         <Rank />
         <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
@@ -115,7 +122,7 @@ class App extends Component {
         <FaceRecognition box={this.state.box} imageURL={this.state.imageURL} />
         </div>
         : (
-          this.state.route === 'SignIn' 
+          this.state.route === 'signin' 
           ? <SignIn onRouteChange={this.onRouteChange} />
           : <Register onRouteChange={this.onRouteChange} />
         )

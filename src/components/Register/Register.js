@@ -22,7 +22,7 @@ const Register = ({onRouteChange}) => {
             </fieldset>
             <div className="">
             <input 
-                onClick={() => onRouteChange('Home')}
+                onClick={() => onRouteChange('home')}
                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
                 type="submit" 
                 value="Register" />

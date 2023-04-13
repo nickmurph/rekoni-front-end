@@ -23,12 +23,14 @@ const MODEL_VERSION_ID = '45fb9a671625463fa646c3523a3087d5';
 
 
 
+
+
 class App extends Component {
   constructor() {
     super();
     this.state = {
       input: '',
-      imageURL: ' ',
+      imageURL: '',
       box: {},
       route: 'signin', 
       isSignedIn: false,
@@ -76,7 +78,6 @@ class App extends Component {
   onButtonSubmit = () => {
     this.setState({imageURL: this.state.input});
 
-
     const clarifaiCredentials = JSON.stringify({
       "user_app_id": {
         "user_id": USER_ID,
@@ -91,7 +92,7 @@ class App extends Component {
             }
         }
     ]});
-
+    
     const requestOptions = {
       method: 'POST',
       headers: {
@@ -100,12 +101,21 @@ class App extends Component {
       },
       body: clarifaiCredentials
     };
-
     fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", requestOptions)
     .then(response => response.json())
-    .then(result =>  this.displayFaceBox(this.calcFaceDimensions(result)))
+    .then(result => {
+      this.displayFaceBox(this.calcFaceDimensions(result));
+      fetch('http://localhost:3000/image', {
+        method: 'put',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({id: this.state.user.id}
+        )})
+      .then(response =>response.json())
+      .then(response => {
+        this.setState(Object.assign(this.state.user, { entries: response}))
+      })
+    })
     .catch(error => console.log(error));
-
   };
 
   onRouteChange = (route) => {

@@ -23,11 +23,12 @@ class SignIn extends React.Component {
               password: this.state.signInPassword
             })
         })
-          .then(response => response.json())
-          .then(data => {
-            if (data === 'success'){
-                this.props.onRouteChange('home');
-            }
+        .then(response => response.json())
+        .then(user => {
+          if(user.id){ 
+            this.props.loadUser(user);
+            this.props.onRouteChange('home');
+          }
         })
     }
 
@@ -62,7 +63,6 @@ class SignIn extends React.Component {
                     </fieldset>
                     <div className="">
                     <input 
-                        // onClick={() => onRouteChange('home')}
                         onClick={this.onSubmitSignIn}
                         className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
                         type="submit" 

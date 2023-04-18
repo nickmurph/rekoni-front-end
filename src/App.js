@@ -22,26 +22,27 @@ const MODEL_ID = 'face-detection';
 const MODEL_VERSION_ID = '45fb9a671625463fa646c3523a3087d5';
 
 
-
+//initial state of app upon startup, return to when user signs out
+const initialState = {
+  input: '',
+  imageURL: '',
+  box: {},
+  route: 'signin', 
+  isSignedIn: false,
+  user: {
+    id: '',
+    name: '',
+    email: '',
+    entries: 0,
+    joined: '' 
+  }
+};
 
 
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      input: '',
-      imageURL: '',
-      box: {},
-      route: 'signin', 
-      isSignedIn: false,
-      user: {
-        id: '',
-        name: '',
-        email: '',
-        entries: 0,
-        joined: '' 
-      }
-    }
+    this.state = initialState;
   }
 
 
@@ -101,6 +102,8 @@ class App extends Component {
       },
       body: clarifaiCredentials
     };
+
+    
     fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", requestOptions)
     .then(response => response.json())
     .then(result => {
@@ -120,7 +123,7 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if (route === 'signout'){
-      this.setState({isSignedIn: false})
+      this.setState(initialState)
       route = "signin"
     }else if (route === 'home'){
       this.setState({isSignedIn: true})

@@ -7,19 +7,10 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
-
 import ParticlesBg from 'particles-bg';
-import {clarifaiKey, clarifaiPAT} from './ClarifaiKey.js';
 
 
-//Helper vars for querying the Clarifai REST API, different from the clarifai node package used by ZTM which is now deprecated
-//API key and PAT kept in JS file that is gitignored, for now
-const API_KEY = clarifaiKey;
-const API_PAT = clarifaiPAT;
-const USER_ID = 'w0rtw0rtw0rt';
-const APP_ID = 'rekoni';
-const MODEL_ID = 'face-detection';
-const MODEL_VERSION_ID = '45fb9a671625463fa646c3523a3087d5';
+
 
 
 //initial state of app upon startup, return to when user signs out
@@ -79,48 +70,27 @@ class App extends Component {
   onButtonSubmit = () => {
     this.setState({imageURL: this.state.input});
 
-    const clarifaiCredentials = JSON.stringify({
-      "user_app_id": {
-        "user_id": USER_ID,
-        "app_id": APP_ID
-    },
-    "inputs": [
-        {
-            "data": {
-                "image": {
-                    "url": this.state.input
-                }
-            }
-        }
-    ]});
-    
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-          'Accept': 'application/json',
-          'Authorization': 'Key ' + API_PAT
-      },
-      body: clarifaiCredentials
-    };
-
-    
-    fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", requestOptions)
-    .then(response => response.json())
-    .then(result => {
-      this.displayFaceBox(this.calcFaceDimensions(result));
+    fetch('http://localhost:3000/imageURL', {
+      method: 'post',
+      headers: {'Content-Type': "application/json"},
+      body: JSON.stringify({
+        input: this.state.input
+      })
+    }).then(response => response.json())
+    .then(response => {
       fetch('http://localhost:3000/image', {
         method: 'put',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({id: this.state.user.id}
         )})
       .then(response =>response.json())
-      .then(response => {
-        this.setState(Object.assign(this.state.user, { entries: response}))
+      .then(result => {
+        this.setState(Object.assign(this.state.user, { entries: result}))
       })
-      .catch(error => console.log(error))
+    this.displayFaceBox(this.calcFaceDimensions(response));
     })
     .catch(error => console.log(error));
-  };
+  }
 
   onRouteChange = (route) => {
     if (route === 'signout'){

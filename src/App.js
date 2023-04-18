@@ -117,6 +117,7 @@ class App extends Component {
       .then(response => {
         this.setState(Object.assign(this.state.user, { entries: response}))
       })
+      .catch(error => console.log(error))
     })
     .catch(error => console.log(error));
   };

@@ -1,5 +1,5 @@
 import React from 'react';
-// let isSignedIn = true;
+
 
 const Navigation = ({onRouteChange, isSignedIn})  => {
         if (isSignedIn){

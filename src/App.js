@@ -71,7 +71,7 @@ class App extends Component {
   onButtonSubmit = () => {
     this.setState({imageURL: this.state.input});
 
-    fetch('http://localhost:3000/imageURL', {
+    fetch('https://rekoni-server.onrender.com/imageURL', {
       method: 'post',
       headers: {'Content-Type': "application/json"},
       body: JSON.stringify({
@@ -79,7 +79,7 @@ class App extends Component {
       })
     }).then(response => response.json())
     .then(response => {
-      fetch('http://localhost:3000/image', {
+      fetch('https://rekoni-server.onrender.com/image', {
         method: 'put',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({id: this.state.user.id}

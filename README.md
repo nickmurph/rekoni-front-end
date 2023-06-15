@@ -4,8 +4,7 @@ Use the following credentials to demo functionality if you choose not to registe
 <br> - email: test (at) rekoni.onrender.com
 <br> - pw: test
 <br><br>
-Note: Rekoni's backend is currently hosted on the free tier of Render, which is not an always-on service. Initital login may be slow as Rekoni spins up the instance hosting the backend. 
-<br><br>
+Note: Rekoni's backend is currently hosted on the free tier of Render, which is not an always-on service. Assuming no activity in the prior 15 minutes, initital login may take a moment as Rekoni spins up the instance hosting the backend. <br><br>
 [Backend Repo](https://github.com/nickmurph/rekoni-backend)
 
 ## Features

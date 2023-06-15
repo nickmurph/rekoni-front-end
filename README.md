@@ -1,4 +1,4 @@
-# Rekoni 
+# Rekoni (frontend)
 React-based front end for a full-stack image recognition service. Rekoni is built around various open-source AI models from  [Clarifai](https://clarifai.com/explore/models). <br><br>
 Use the following credentials to demo functionality if you choose not to register an account: 
 <br> - email: test (at) rekoni.onrender.com

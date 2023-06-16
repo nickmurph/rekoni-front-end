@@ -102,7 +102,10 @@ class App extends Component {
   }
 
   onRouteChange = (route) => {
-    if (route === 'signout'){
+    if (route === 'returnfromregister'){
+      route = "signin"
+    }
+    else if (route === 'signout'){
       this.setState(initialState)
       route = "signin"
     }else if (route === 'home'){
@@ -119,7 +122,7 @@ class App extends Component {
         <br />
         <div className="inline-flex flex-row">
           <Logo />
-          <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
+          {route === 'home' ? <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} /> : <></>}
         </div>
         <br />
         <br />

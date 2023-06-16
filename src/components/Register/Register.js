@@ -84,6 +84,9 @@ class Register extends React.Component {
                 type="submit" 
                 value="Register" 
                 />
+                <br />
+                <br />
+                <div className="pointer grow" onClick={() => (this.props.onRouteChange("returnfromregister"))}>{"Back to sign-in"}</div>
             </div>
         </div>
     </main>

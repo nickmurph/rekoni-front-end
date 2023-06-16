@@ -18,7 +18,7 @@ import './App.css';
 const initialState = {
   input: '',
   imageURL: '',
-  box: {},
+  boxes: [],
   route: 'signin', 
   isSignedIn: false,
   user: {
@@ -49,19 +49,26 @@ class App extends Component {
   }
 
   calcFaceDimensions = (data) => {
-    const foundFace = data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('inputImage');
     const [width, height] = [Number(image.width), Number(image.height)];
-    return {
-      leftCol: foundFace.left_col * width,
-      topRow: foundFace.top_row * height,
-      rightCol: width - (foundFace.right_col * width),
-      bottomRow: height - (foundFace.bottom_row * height)
+    const foundFaces = data.outputs[0].data.regions;
+    const newBoxes = []
+
+    for (let face of foundFaces){
+      let foundFace = face.region_info.bounding_box;
+      let curBox = {
+        leftCol: foundFace.left_col * width,
+        topRow: foundFace.top_row * height,
+        rightCol: width - (foundFace.right_col * width),
+        bottomRow: height - (foundFace.bottom_row * height)
+      }
+      newBoxes.push(curBox)
     }
+    return newBoxes
   };
 
-  displayFaceBox = (box) => {
-    this.setState({box: box});
+  displayFaceBox = (foundBoxes) => {
+    this.setState({boxes: foundBoxes});
   }
 
   onInputChange= (event) => {
@@ -70,6 +77,7 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({imageURL: this.state.input});
+    this.setState({boxes: []}) //ensures boxes from previous picture analysis don't temporarily show on next picture load
 
     fetch('https://rekoni-server.onrender.com/imageURL', {
       method: 'post',
@@ -105,7 +113,7 @@ class App extends Component {
 
 
   render() {
-    const { isSignedIn, imageURL, route, box } = this.state;
+    const { isSignedIn, imageURL, route, boxes } = this.state;
     return (
       <div className="App">
         <br />
@@ -122,7 +130,7 @@ class App extends Component {
         <Rank name={this.state.user.name} entries={this.state.user.entries}/>
         <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
         <br />
-        <FaceRecognition box={box} imageURL={imageURL} />
+        <FaceRecognition imageURL={imageURL} boxes={boxes} />
         </div>
         : (
           route === 'signin' 
